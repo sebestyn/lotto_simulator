@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Lotto_simulator</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="icon" href="icon.png" type="image/gif" sizes="16x16">
+	<!--FONTAWSOME-->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<!--JQUERY-->
+		<script type="text/javascript" src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+	<!--CANCAS JS-->
+	  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js'></script>
+	<!--BOOTSTRAP-->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!--NICE ALERT BOX-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
+	<!--CSS-->
+        <link rel='stylesheet' type='text/css' href='../hasz.css'>
+        <link rel='stylesheet' type='text/css' href='../lotto.css'>
+    </head>
+    
+    <body style="background-color:powderblue;"> 
+        
+        <div class="sk-cube-grid hide">
+          <div class="sk-cube sk-cube1"></div>
+          <div class="sk-cube sk-cube2"></div>
+          <div class="sk-cube sk-cube3"></div>
+          <div class="sk-cube sk-cube4"></div>
+          <div class="sk-cube sk-cube5"></div>
+          <div class="sk-cube sk-cube6"></div>
+          <div class="sk-cube sk-cube7"></div>
+          <div class="sk-cube sk-cube8"></div>
+          <div class="sk-cube sk-cube9"></div>
+          <div><center>Calculate...</center></div>
+        </div>
+        
+        <center>
+          <!--INPUT SPAN-->
+            <span id="inputSpan">
+                <h1 class='marginTop4'>
+                    Lotto Simulator
+                </h1>
+                
+                <p class="marginTop4">Részletes adatok megadása:</p>
+                <input type="checkbox" id="switch" class="" /><label id="switchLabel" for="switch">Toggle</label>
+                
+                <div class="input-group mb-3 width23remMobile90pc alap" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Meddig játszom</span>
+                  </div>
+                  <input type="number" value="4" class="form-control " id='meddigJatszom' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">hét</span>
+                  </div>
+                </div>            
+                <div class="input-group mb-3 width23remMobile90pc alap" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Heti hány szelvény</span>
+                  </div>
+                  <input type="number" value="6" class="form-control" id="hanySzelveny" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">db</span>
+                  </div>
+                </div>            
+                
+                
+                <div class="input-group mb-3 width23remMobile90pc marginBottom0p5 alap" >
+                  <div class="input-group-prepend">
+                    <label class="input-group-text width12" for="inputGroupSelect01">Szelvény számaim</label>
+                  </div>
+                  <select class="custom-select" id="szamokValasztasaInput">
+                    <option selected value="0">Random</option>
+                    <option value="1">Én válsztom</option>
+                  </select>
+                </div>
+                <div class='szamaimInputDiv'>
+                  
+                </div>
+                
+                
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Szelvény ára</span>
+                  </div>
+                  <input type="number" value="250" placeholder="250" class="form-control" id="szelvenyAra" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">Ft</span>
+                  </div>
+                </div>
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Hanyas lottó</span>
+                  </div>
+                  <input type="number" value="5"  class="form-control" id="hanyasLotto" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">-</span>
+                  </div>
+                </div>
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Átlagos résztvevők</span>
+                  </div>
+                  <input type="number" value="4500000" class="form-control" id="atlagosResztvevok" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">db</span>
+                  </div>
+                </div>
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Résztvevők változása</span>
+                  </div>
+                  <input type="number" value="15" class="form-control" id="resztvevokValtozas" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">%</span>
+                  </div>
+                </div>
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Szelvényen max szám</span>
+                  </div>
+                  <input type="number" value="90" class="form-control" id="szelvenyMaxSzam" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">-</span>
+                  </div>
+                </div>
+                <div class="input-group mb-3 width23remMobile90pc halado" >
+                  <div class="input-group-prepend">
+                    <span class="input-group-text width12" id="inputGroup-sizing-default ">Bevételből nyerőknek</span>
+                  </div>
+                  <input type="number" value="37" class="form-control" id="bevetelbolVisszaArany" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  <div class="input-group-append ">
+                    <span class="input-group-text width3">%</span>
+                  </div>
+                </div>
+                
+                <div class="page__toggle">
+                  <label class="toggle">
+                    <input class="toggle__input gyorsCheckbox" type="checkbox" checked>
+                    <span class="toggle__label">
+                      <span class="toggle__text">Gyors futtatás</span>
+                    </span>
+                  </label>
+                </div>
+                
+                <button class="btn btn-lg btn-light playgomb width10 marginTop2" >Play</button>
+                
+            </span>
+          <!--OUTPUT SPAN-->
+            <span id="outputSpan">
+              <div class='marginTop3'>
+                  <p id='resultP' class='fontSize1'>
+                    
+                  </p>
+                  <div id="egyenlegemChart" class="statChart "></div>
+                  <div id="bankEgyenlegeChart" class="statChart "></div>
+                  <div id="fizetesekChart" class="statChart "></div>
+                  <div id="talalataimChart" class="statChart "></div>
+                  <div id="osszesTalalatokChart" class="statChart "></div>
+                  <div id="resztvevokChart" class="statChart "></div>
+              </div>
+              <button class="btn btn-lg btn-light margin3 ujraProbalomButton"> Újra próbálom</button>
+            </span>
+        </center>
+        
+        <div id="testChart" class="statChart hide"></div>
+    
+    
+
+        
+     <script>
+        $('.alap').show();
+        $('.halado').hide();
+        $('#outputSpan').hide();
+        $('.gyorsCheckbox').prop('checked', false);
+        $('.toggle__label').click();
+        $("#switch").change(function(){
+          var bool = $(this).is(':checked')
+          if(bool){
+            $('.alap').show()
+            $('.halado').show()
+          }else{
+            $('.alap').show()
+            $('.halado').hide()
+          }
+        });
+        $(".ujraProbalomButton").on("click",function(){
+          $('#outputSpan').hide();
+          $('#inputSpan').show();
+          $("#resultP").text(' ')
+        });
+        
+        $("#szamokValasztasaInput").on('change', function() {
+          if(Number(this.value)){
+            $('.szamaimInputDiv').append(' <center><h3>Add meg a számaid!</h3></center> ');
+            for(var i=0;i<Number($('#hanyasLotto').val());i++){
+              $('.szamaimInputDiv').append(' <input type="number" class="hideArrowsInInput width3 alignCenter szamaimInputs marginBottom1"> ');
+            }
+          }
+          else{
+            $('.szamaimInputDiv').html('');
+          }
+        });
+        
+        $('.playgomb').on('click',function(){
+            
+            var hiba                  = false;
+            var meddigJatszom         = $('#meddigJatszom').val();
+            var hanySzelveny          = $('#hanySzelveny').val();
+            var szelvenyAra           = $('#szelvenyAra').val();
+            var hanyasLotto           = $('#hanyasLotto').val();
+            var atlagosResztvevok     = $('#atlagosResztvevok').val();
+            var resztvevokValtozas    = $("#resztvevokValtozas").val();
+            var szelvenyMaxSzam       = $("#szelvenyMaxSzam").val();
+            var bevetelbolVisszaArany = $("#bevetelbolVisszaArany").val();
+            var gyorsFuttatas         = $(".gyorsCheckbox").is(':checked');
+            var szamokValasztasa      = Boolean(Number($("#szamokValasztasaInput").val()));
+            var szamok                = false;
+            
+
+            
+            if(szamokValasztasa){
+              szamok = [];
+              $(".szamaimInputs").each(function() {
+                  var szam = Number($(this).val());
+                  if(szam<=Number(szelvenyMaxSzam) && szam>0){
+                    szamok.push( szam )
+                  }
+                  else{
+                    hiba = true
+                    Swal.fire({
+                      type: 'error',
+                      title: 'Oops...',
+                      text: 'Túl nagy vagy túl kicsi számot adtál meg a szelvény számainál!'
+                    })
+                  }
+              });
+              if(haveSame(szamok)){
+                hiba = true
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Egy szám csak egyszer szerepelhet a szelvény számainál!'
+                })
+              }
+            }
+            if(!gyorsFuttatas){
+              if(Number(meddigJatszom)>9 && Number(atlagosResztvevok) > 500000){
+                hiba = true
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Ilyen sok résztvevőnél és hétnél inkább használd a "Gyors futtatás"-t !'
+                })
+              }
+            }
+            if(gyorsFuttatas && Number(hanyasLotto) != 5){
+              hiba = true
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: '"Gyors futtatás" csak 5-ös lottónál használható !'
+              })
+            }
+            if(Number(meddigJatszom)>522){
+              hiba = true
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Nem lehet 522 hétnél tovább futtatni !'
+              })
+            }
+            if(Number(hanySzelveny)>1001){
+              hiba = true
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Max 1000 szelvényt vehetsz egy héten !'
+              })
+            }
+            
+          if(!hiba){
+            $('#inputSpan').hide();
+            $(".sk-cube-grid").removeClass('hide');
+            
+            $.ajax({
+                url:'/run',
+                type:'POST',
+                dataType:'json',
+                data:{
+                    meddigJatszom         : meddigJatszom,
+                    hanySzelveny          : hanySzelveny,
+                    szelvenyAra           : szelvenyAra,
+                    hanyasLotto           : hanyasLotto,
+                    atlagosResztvevok     : atlagosResztvevok,
+                    resztvevokValtozas    : resztvevokValtozas,
+                    szelvenyMaxSzam       : szelvenyMaxSzam,
+                    bevetelbolVisszaArany : bevetelbolVisszaArany,
+                    gyorsFuttatas         : gyorsFuttatas,
+                    szamok                : szamok
+                },
+                success:function(back){
+                      $('#outputSpan').show();
+                      viszzaJott = back.a
+            					console.log(viszzaJott);
+            					$(".sk-cube-grid").addClass('hide');
+            					
+            					/*
+            					$('#resultP').append("Mennyi ideig játszottam: " + viszzaJott.meddigJatszom + "<br>");
+            					$('#resultP').append("Hetente hány szelvényt vettem: " + seperate(viszzaJott.hetenteHanySzelvenytVeszek) + "db <br>");
+            					$('#resultP').append("Összesen hány szelvényt vettem: " + seperate(viszzaJott.osszesenHanySzevenytVettem) + "db <br>");
+            					$('#resultP').append("Mennyibe került egy szelvény: " + seperate(viszzaJott.mennyibeKerulEgySzelveny) + "Ft <br>");
+            					$('#resultP').append("Mennyit fizettem összesen: " + seperate(viszzaJott.osszesenMennyitFizettem) + "Ft <br>");
+            					$('#resultP').append("Hány szelvényem nyert: " + seperate(viszzaJott.hanySzelvenyemNyert) + "db (" + viszzaJott.hanySzelvenyemNyertSzazalek + "%) <br>");
+            					$('#resultP').append("Találataim: " + viszzaJott.találataimString + "<br>");
+            					$('#resultP').append("Mennyit nyertem rajtuk: " + seperate(viszzaJott.osszesenNyertemPenz) + "Ft (" + viszzaJott.visszanyertemSzazalekban +"%)<br>");
+            					$('#resultP').append("Összesen kerestem: " + seperate(viszzaJott.kerestem) + "Ft-ot" + "<br>");
+            					$('#resultP').append("Eladott szelvények: " + seperate(viszzaJott.szerencsejatekBevetele) + " db  (" + seperate(viszzaJott.atlagosanHanySzelvenytVettekPerHet)  + "/hét) <br>");
+            					$('#resultP').append("Szerencsejáték bevétele: " + seperate(viszzaJott.osszesenHanySzelvenytAdtakEl) + " Ft  (" + seperate(viszzaJott.szerencsejatekBevetelePerHet)  + "/hét) <br>");
+            					$('#resultP').append("MÁSOK TALÁLATAI: " + viszzaJott.masokTalalataiString + "<br>");
+            					*/
+            					
+                      //STATISTIKA KÉSZÍTÉS
+                      
+                        //ALAP
+                          $('#resultP').append("<div class='statAlapDiv padding1 align-bottom'> <center> <h2 class='fontSize3vwMobile6vw' > Eredmény:</h2><h1 class='marginTop6Mobile3 fontSize5vwMobile10vw'>" + viszzaJott.statNyertem  + "</h1></center> </div>");
+                          
+                          $('#resultP').append("<div class='statAlapDiv padding1 align-bottom'> <center> <h2 class='fontSize3vwMobile6vw'> Mennyi ideig játszottam:</h2><h1 class='margin1Mobile0p5 marginBottom3Mobile1p5 fontSize5vwMobile10vw'>" + viszzaJott.meddigJatszom + "</h1>"+
+                                                                                           "<h2 class='fontSize3vwMobile6vw'> Összesen hány szelvényt vettem:</h2><h1 class='margin1Mobile0p5 fontSize5vwMobile10vw'>" + seperate(viszzaJott.osszesenHanySzevenytVettem) + " db</h1>  </center> </div>");
+                      
+                        //EGYENLEGEM KÖVETÉSE
+                          var chart = new CanvasJS.Chart("egyenlegemChart", {
+                          	animationEnabled: true,
+                          	theme: "light2",
+                          	type:"spline",
+                          	title:{
+                          	  fontSize: 25,
+                          	  fontFamily: "tahoma",
+                      	      fontWeight: "normal",
+                      	      padding: 12,
+                          		text: "EGYENLEGEM"
+                          	},
+                          	axisY: {
+                          		suffix: " FT",
+                          	},
+                          	axisX: {
+                          		suffix: ". hét",
+                          		
+                          	},
+                          	data: [{        
+                          		type: "line",       
+                          		dataPoints: viszzaJott.statEgyenlegem
+                          	}]
+                          });
+                          chart.render();
+                        
+                        //BANK EGYENLEGE KÖVETÉSE
+                          var chart = new CanvasJS.Chart("bankEgyenlegeChart", {
+                          	animationEnabled: true,
+                          	theme: "light2",
+                          	type:"spline",
+                          	title:{
+                          	  fontSize: 25,
+                          	  fontFamily: "tahoma",
+                      	      fontWeight: "normal",
+                      	      padding: 12,
+                          		text: "BANK EGYENLEGE"
+                          	},
+                          	axisY: {
+                          		suffix: " FT",
+                          	},
+                          	axisX: {
+                          		suffix: ". hét",
+                          		
+                          	},
+                          	data: [{        
+                          		type: "line",       
+                          		dataPoints: viszzaJott.statBankgyenlege
+                          	}]
+                          });
+                          chart.render();
+                      
+                      //FIZETÉSEIM CHART 
+                        var chart = new CanvasJS.Chart("fizetesekChart", {
+                      	animationEnabled: true,
+                      	title: {
+                      	  fontSize: 25,
+                      	  fontFamily: "tahoma",
+                      	  fontWeight: "normal",
+                      	  padding: 12,
+                      		text: "FIZETTEM VS NYERTEM"
+                      	},
+                      		subtitles: [{
+                        		text: "Visszanyertem: " + viszzaJott.visszanyertemSzazalekban +"%",
+                        		fontSize: 16
+                        	}],
+                      	data: [{
+                      		type: "pie",
+                      		startAngle: 240,
+                      		yValueFormatString: "##0\" Ft\"",
+                      		indexLabel: "{label} {y}",
+                      		dataPoints: [
+                      			{y: viszzaJott.osszesenMennyitFizettem , label: "Fizettem:"},
+                      			{y: viszzaJott.osszesenNyertemPenz , label: "Nyertem:"}
+                      		]
+                      	}]
+                      });
+                      chart.render();
+                    
+                    // TALÁLATAIM CHART
+                      var chart = new CanvasJS.Chart("talalataimChart", {
+                      	animationEnabled: true,
+                      	theme: "light2", // "light1", "light2", "dark1", "dark2"
+                      	title:{
+                      	  fontSize: 25,
+                      	  fontFamily: "tahoma",
+                      	  fontWeight: "normal",
+                      	  padding: 12,
+                      		text: "TALÁLATAIM"
+                      	},
+                      	axisY: {
+                      		title: "Darab"
+                      	},
+                      	axisX: {
+                      		title: "Hanyas találat",
+                      		
+                      	},
+                      	data: [{       
+                      	  indexLabel: "{y}",
+                      		indexLabelFontColor: "#000000",
+                      		indexLabelPlacement: "top",
+                      		yValueFormatString: "# db",
+                      		type: "column",  
+                      		dataPoints: viszzaJott.statTalalataim
+                      	}]
+                      });
+                      chart.render();
+                      
+                    // ÖSSZES TALÁLATOK CHART
+                      var chart = new CanvasJS.Chart("osszesTalalatokChart", {
+                      	animationEnabled: true,
+                      	theme: "light2", // "light1", "light2", "dark1", "dark2"
+                      	title:{
+                      	  fontSize: 25,
+                      	  fontFamily: "tahoma",
+                      	  fontWeight: "normal",
+                      	  padding: 12,
+                      		text: "ÖSSZES TALÁLATOK"
+                      	},
+                      	axisY: {
+                      		title: "Darab"
+                      	},
+                      	axisX: {
+                      		title: "Hanyas találat",
+                      		
+                      	},
+                      	data: [{       
+                      	  indexLabel: "{y}",
+                      		indexLabelFontColor: "#000000",
+                      		indexLabelPlacement: "top",
+                      		yValueFormatString: "# db",
+                      		type: "column",  
+                      		dataPoints: viszzaJott.statOsszesTalalatok
+                      	}]
+                      });
+                      chart.render();
+                    
+                    //RÉSZTVEVŐK CHART
+                      var chart = new CanvasJS.Chart("resztvevokChart", {
+                      	animationEnabled: true,  
+                      	title:{
+                      	  fontSize: 25,
+                      	  fontFamily: "tahoma",
+                      	  fontWeight: "normal",
+                      	  padding: 12,
+                      		text: "ELADOTT SZELVÉNYEK"
+                      	},
+                      	axisY: {
+                      		title: "Eladva",
+                      		stripLines: [{
+                      			value: getOneInObj(viszzaJott.statResztvevok).reduce((partial_sum, a) => partial_sum + a) / viszzaJott.statResztvevok.length,
+                      			label: "Átlag"
+                      		}], 
+                      	},
+                      	axisX: {
+                      		suffix: ". hét",
+                      		
+                      	},
+                      	data: [{
+                      		type: "line",
+                      		dataPoints: viszzaJott.statResztvevok
+                      	}]
+                      });
+                      chart.render();
+
+                      //$('.statChart').removeClass('hide');
+
+            					
+            					
+            					
+            				}
+            });
+          }
+        });
+        
+  //FUNCTION
+    //
+      function getOneInObj(data) {
+        var a = [];
+        for (var i = 0; i < data.length; i++) {
+            a.push(data[i]['y']);
+        }
+        return a;
+      }
+  
+    //OLVASHATŐBB NAGY SZÁMOK
+      function seperate(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      }
+    
+    //VAN 2 UGYAN OLYAN 1 ARRAYBAN
+      function haveSame(array){
+        for(var i=0;i<array.length;i++){
+          for(var j=0;j<array.length;j++){
+            if(array[i] == array[j] && !(i==j)){
+              return true
+            }
+          }
+        }
+        return false;
+      }
+
+  // NORMAL DISTRUBATION
+    function normalDist(mean, stdev) {
+        var y2;
+        var use_last = false;
+        return function() {
+            var y1;
+            if(use_last) {
+               y1 = y2;
+               use_last = false;
+            }
+            else {
+                var x1, x2, w;
+                do {
+                     x1 = 2.0 * Math.random() - 1.0;
+                     x2 = 2.0 * Math.random() - 1.0;
+                     w  = x1 * x1 + x2 * x2;               
+                } while( w >= 1.0);
+                w = Math.sqrt((-2.0 * Math.log(w))/w);
+                y1 = x1 * w;
+                y2 = x2 * w;
+                use_last = true;
+           }
+    
+           var retval = mean + stdev * y1;
+           if(retval > 0) 
+               return retval;
+           return -retval;
+       }
+    }
+    var standard = normalDist(4500000, 4500000*0.15);
+    var plObject = [];
+    
+    for(var i=0; i<2; i++) {
+      var szam = Math.round(standard()/100000);
+      var vanMar=false;
+      for(var j=0;j<plObject.length;j++){
+        if(szam == plObject[j]['x']){
+          plObject[j]['y'] += 1;
+          vanMar = true
+          break;
+        }
+      }
+      if(!vanMar){
+        plObject.push({
+          'x':szam,
+          'y':1
+        })
+      }
+    }
+    function SortByX(a, b){
+      var aName = a.x;
+      var bName = b.x; 
+      return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    }
+    
+    plObject.sort(SortByX);
+    
+
+    
+    var chart = new CanvasJS.Chart("testChart", {
+    	animationEnabled: true,
+    	theme: "light2",
+    	title:{
+    		text: "Simple Line Chart"
+    	},
+    	axisY:{
+    		includeZero: false
+    	},
+    	data: [{        
+    		type: "spline",       
+    		dataPoints: plObject
+    	}]
+    });
+    chart.render();
+        
+        
+        
+        
+     </script>  
+    </body>
+</html>
+
+

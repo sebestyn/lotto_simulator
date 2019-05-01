@@ -1,0 +1,303 @@
+p, h1{
+  font-family: Georgia, serif
+}
+.statChart{
+  height: 25rem;
+  width: 75%;
+  margin-top: 4rem;
+}
+.statAlapDiv{
+  height: 25rem;
+  width: 75%;
+  margin-top: 4rem;
+  background-color: white;
+}
+
+
+
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+  .statChart{
+    height: 18rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .statAlapDiv{
+    height: 18rem;
+    width: 100%;
+    margin-top: 1rem;
+    background-color: white;
+  }
+}
+
+
+
+
+
+/*  ANIMATION LOADING   */
+.sk-cube-grid {
+  width: 7rem;
+  height: 7rem;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:black;
+  z-index: 10;
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: white;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+          animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out,
+                    cubeColorChanging 6.5s infinite linear;
+}
+
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); 
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
+}
+@keyframes cubeColorChanging{
+  0%{
+    background-color:#D3F6DB;
+  }20%{
+    background-color:#92D5E6;
+  }40%{
+    background-color:#772D8B;
+  }60%{
+    background-color:#0A4A59;
+  }80%{
+    background-color:#D3F6DB;
+  }100%{
+    
+  }
+}
+
+/*SWITCH*/
+
+#switch{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+#switchLabel {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 4rem;
+	height: 2rem;
+	background: #1ba73a;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+	margin-top: -1.5rem;
+}
+
+#switchLabel:after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 4px;
+	width: 1.6rem;
+	height: 1.6rem;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + #switchLabel {
+	background: #c31515;
+}
+
+input:checked + #switchLabel:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+#switchLabel:active:after {
+	width: 3rem;
+}
+
+
+
+
+
+/*
+=====
+LEVEL 1. CORE STYLES
+=====
+*/
+
+.toggle{
+  --uiToggleSize: var(--toggleSize, 20px);
+  --uiToggleIndent: var(--toggleIndent, .4em);
+  --uiToggleBorderWidth: var(--toggleBorderWidth, 3px);
+  --uiToggleColor: var(--toggleColor, #000);
+  --uiToggleDisabledColor: var(--toggleDisabledColor, #868e96);
+  --uiToggleBgColor: var(--toggleBgColor, #fff);
+  --uiToggleArrowWidth: var(--toggleArrowWidth, 2px);
+  --uiToggleArrowColor: var(--toggleArrowColor, black);
+
+  display: inline-block;
+  position: relative;
+}
+
+.toggle__input{
+  position: absolute;
+  left: -99999px;
+}
+
+.toggle__label{
+  display: inline-flex;
+  cursor: pointer;
+  min-height: var(--uiToggleSize);
+  padding-left: calc(var(--uiToggleSize) + var(--uiToggleIndent));
+}
+
+.toggle__label:before, .toggle__label:after{
+  content: "";
+  box-sizing: border-box;  
+  width: 1em;
+  height: 1em;
+  font-size: var(--uiToggleSize);
+  border:solid black 1px;
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.toggle__text{
+  color:black;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+.toggle__text:before{
+  content: "";
+  box-sizing: border-box;
+  width: 0;
+  height: 0;
+  font-size: var(--uiToggleSize);
+
+  border-left-width: 0;
+  border-bottom-width: 0;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  border-color: var(--uiToggleArrowColor);
+
+  position: absolute;
+  top: .5428em;
+  left: .2em;
+  z-index: 3;
+
+  transform-origin: left top;
+  transform: rotate(-40deg) skew(10deg);
+}
+
+.toggle__input:not(:disabled):checked ~ .toggle__label .toggle__text:before{
+  width: .5em;
+  height: .25em;
+  border-left-width: var(--uiToggleArrowWidth);
+  border-bottom-width: var(--uiToggleArrowWidth);
+  will-change: width, height;
+  transition: width .1s ease-out .2s, height .2s ease-out;
+}
+
+
+.toggle__input:not(:disabled) ~ .toggle__label:before,
+.toggle__input:not(:disabled) ~ .toggle__label:after{
+  opacity: 1;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform .2s ease-out;
+}
+
+.toggle__input:not(:disabled) ~ .toggle__label:before{
+  transform: rotateY(0deg);
+  transition-delay: .2s;
+}
+
+.toggle__input:not(:disabled) ~ .toggle__label:after{
+  transform: rotateY(90deg);
+}
+
+.toggle__input:not(:disabled):checked ~ .toggle__label:before{
+  transform: rotateY(-90deg);
+  transition-delay: 0s;
+}
+
+.toggle__input:not(:disabled):checked ~ .toggle__label:after{
+  transform: rotateY(0deg);
+  transition-delay: .2s;
+}
+
+.toggle__text:before{
+  opacity: 0;
+}
+
+.toggle__input:not(:disabled):checked ~ .toggle__label .toggle__text:before{
+  opacity: 1;
+  transition: opacity .1s ease-out .3s, width .1s ease-out .5s, height .2s ease-out .3s;
+}
+
+/*
+=====
+LEVEL 3. SETTINGS
+=====
+*/
+.toggle{
+  --toggleColor: black;
+  --toggleBgColor: black;
+  --toggleSize: 20px;
+  margin-left:-2rem;
+  margin-top:0.4rem;
+}

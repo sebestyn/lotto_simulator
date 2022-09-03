@@ -13,9 +13,7 @@
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "~3.2.4",
-    "method-override": "^3.0.0",
     "mongodb": "^3.2.2",
-    "mongoose": "^5.4.19",
     "socket.io": "~0.9.14"
   }
 }

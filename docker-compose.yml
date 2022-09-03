@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+    lotto-simulator:
+        image: lotto-simulator
+        container_name: lotto-simulator
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        environment:
+            NODE_ENV: production
+        ports:
+            - 4005:3000
+        volumes:
+            - .:/app
+        restart: unless-stopped
+
+volumes:
+    data:
+
+networks:
+    default:
+        external:
+            name: nginx-proxy-manager_default

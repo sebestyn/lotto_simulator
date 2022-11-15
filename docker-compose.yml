@@ -2,23 +2,27 @@ version: "3.4"
 
 services:
     lotto-simulator:
-        image: lotto-simulator
-        container_name: lotto-simulator
+        image: lottosimulator
+        container_name: lottosimulator
         build:
             context: .
             dockerfile: ./Dockerfile
         environment:
             NODE_ENV: production
+        networks:
+            - nginx-proxy-manager_default
         ports:
-            - 4005:3000
+            - 3973:3000
         volumes:
             - .:/app
         restart: unless-stopped
+        labels:
+            - "com.centurylinklabs.watchtower.enable=false"
 
 volumes:
     data:
 
 networks:
-    default:
-        external:
-            name: nginx-proxy-manager_default
+    nginx-proxy-manager_default:
+        external: false
+        name: nginx-proxy-manager_default
